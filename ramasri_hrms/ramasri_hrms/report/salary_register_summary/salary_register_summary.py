@@ -39,7 +39,7 @@ def execute(filters=None):
 	totals = {"gross_pay": 0, "net_pay": 0, "sso": 0, "tax": 0, "edu": 0, "penalty": 0}
 	sc_sso = "หักเงินประกันสังคม"
 	sc_tax = "หักเงินภาษีบุคคลธรรมดา"
-	sc_edu = "หักเงินกยศ."
+	sc_edu = "หักเงินกยศ"
 	sc_penalties = ["หักเงินลาเกินสิทธิ์", "หักเงินอื่นๆ"]  # penalties are deducted without having to pay anyone
 	# --
 
