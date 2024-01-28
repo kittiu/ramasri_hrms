@@ -59,10 +59,10 @@ app_license = "mit"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "ramasri_hrms.utils.jinja_methods",
-# 	"filters": "ramasri_hrms.utils.jinja_filters"
-# }
+jinja = {
+	"methods": "ramasri_hrms.utils.get_payroll_summary_by_component",
+	# "filters": "ramasri_hrms.utils.jinja_filters"
+}
 
 # Installation
 # ------------
