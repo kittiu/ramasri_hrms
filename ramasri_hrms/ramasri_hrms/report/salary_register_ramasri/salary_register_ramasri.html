@@ -1,0 +1,169 @@
+<style>
+    table thead tr th {
+		text-align: center;
+		font-size: 10px;
+	}
+    table tbody tr td {
+		text-align: right;
+		font-size: 10px;
+	}
+</style>
+
+{%
+	var report_columns = report.get_columns_for_print();
+%}
+<p style="padding-top: 7px;"><i>มูลนิธิรามาธิบดี</i></p>
+<p style="font-size: 15px;"><b>รายงานสรุปยอดเงินเดือนพนักงาน</b></p>
+<p style="font-size: 12px;">{{ __("ระหว่างวันที่") }} {{ frappe.datetime.str_to_user(filters.from_date) }} {{ __("ถึงวันที่") }} {{ frappe.datetime.str_to_user(filters.to_date) }}</p>
+<hr>
+
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th width="10%" rowspan="2">รหัส</th>
+		<th width="10%" rowspan="2">ชื่อพนักงาน</th>
+		<th width="2%" rowspan="2">วัน</th>
+		<th width="6%">เงินเดือน</th>
+		<th width="6%">ค่าตำแหน่ง</th>
+		<th width="6%">ค่าตอบแทนพิเศษ</th>
+		<th width="6%">เงินได้อื่นๆ</th>
+		<th width="6%">ค่าชดเชย</th>
+		<th width="6%">ค่าชดเชยพักร้อน</th>
+		<th width="6%"></th>
+		<th width="1%"></th>
+		<th width="6%"></th>
+		<th width="6%"></th>
+		<th width="1%"></th>
+		<th width="6%">รวมรับ</th>
+		<th width="6%"></th>
+	</tr>
+	<tr>
+		<th>หักเงินลาเกินสิทธิ์</th>
+		<th>หักเงินอื่นๆ</th>
+		<th>หักเงินภาษีบุคคลธรรมดา</th>
+		<th>หักเงินประกันสังคม</th>
+		<th>หักเงินกองทุนสำรองเลี้ยงชีพ</th>
+		<th>หักเงินกยศ</th>
+		<th>หักเงินสหกรณ์</th>
+		<th></th>
+		<th>ปกสค มูลนิธิ</th>
+		<th>PVF- มูลนิธิ</th>
+		<th></th>
+		<th>รวมจ่าย</th>
+		<th>สุทธิ</th>
+	</tr>
+	</thead>
+	{% 	
+		var x = {
+			"xxx": 0,
+		};
+		var เงินเดือน = 0;
+		var ค่าตำแหน่ง = 0;
+		var ค่าตอบแทนพิเศษ = 0;
+		var เงินได้อื่นๆ = 0;
+		var ค่าชดเชย = 0;
+		var ค่าชดเชยพักร้อน = 0;
+		var หักเงินลาเกินสิทธิ์ = 0;
+		var หักเงินอื่นๆ = 0;
+		var หักเงินภาษีบุคคลธรรมดา = 0;
+		var หักเงินประกันสังคม = 0;
+		var หักเงินกองทุนสำรองเลี้ยงชีพ = 0;
+		var หักเงินกยศ = 0;
+		var หักเงินสหกรณ์ = 0;
+		var หักเงินประกันสังคม = 0;
+		var หักเงินกองทุนสำรองเลี้ยงชีพ = 0;
+		var gross_pay = 0;
+		var total_deduction = 0;
+		var net_pay = 0;
+	%}
+	<tbody>
+	{% for(var j=0, k=data.length; j<k; j++) { %}
+		{%
+			var row = data[j];
+			เงินเดือน = เงินเดือน + row["เงินเดือน"];
+			ค่าตำแหน่ง = ค่าตำแหน่ง + row["ค่าตำแหน่ง"];
+			ค่าตอบแทนพิเศษ = ค่าตอบแทนพิเศษ + row["ค่าตอบแทนพิเศษ"];
+			เงินได้อื่นๆ = เงินได้อื่นๆ + row["เงินได้อื่นๆ"];
+			ค่าชดเชย = ค่าชดเชย + row["ค่าชดเชย"];
+			ค่าชดเชยพักร้อน = ค่าชดเชยพักร้อน + row["ค่าชดเชยพักร้อน"];
+			หักเงินลาเกินสิทธิ์ = หักเงินลาเกินสิทธิ์ + row["หักเงินลาเกินสิทธิ์"];
+			หักเงินอื่นๆ = หักเงินอื่นๆ + row["หักเงินอื่นๆ"];
+			หักเงินภาษีบุคคลธรรมดา = หักเงินภาษีบุคคลธรรมดา + row["หักเงินภาษีบุคคลธรรมดา"];
+			หักเงินประกันสังคม = หักเงินประกันสังคม + row["หักเงินประกันสังคม"];
+			หักเงินกองทุนสำรองเลี้ยงชีพ = หักเงินกองทุนสำรองเลี้ยงชีพ + row["หักเงินกองทุนสำรองเลี้ยงชีพ"];
+			หักเงินกยศ = หักเงินกยศ + row["หักเงินกยศ"];
+			หักเงินสหกรณ์ = หักเงินสหกรณ์ + row["หักเงินสหกรณ์"];
+			หักเงินประกันสังคม = หักเงินประกันสังคม + row["หักเงินประกันสังคม"];
+			หักเงินกองทุนสำรองเลี้ยงชีพ = หักเงินกองทุนสำรองเลี้ยงชีพ + row["หักเงินกองทุนสำรองเลี้ยงชีพ"];
+			gross_pay = gross_pay + row["gross_pay"];
+			total_deduction = total_deduction + row["total_deduction"];
+			net_pay = net_pay + row["net_pay"];
+		%}
+		<tr>
+			<td rowspan="2" style="text-align: center;">{{ row["employee"] }}</td>
+			<td rowspan="2" style="text-align: center;">{{ row["employee_name"] }}</td>
+			<td rowspan="2" style="text-align: center;">{{ row["payment_days"]}}</td>
+			<td>{{ format_number(row["เงินเดือน"]) }}</td>
+			<td>{{ format_number(row["ค่าตำแหน่ง"]) }}</td>
+			<td>{{ format_number(row["ค่าตอบแทนพิเศษ"]) }}</td>
+			<td>{{ format_number(row["เงินได้อื่นๆ"]) }}</td>
+			<td>{{ format_number(row["ค่าชดเชย"]) }}</td>
+			<td>{{ format_number(row["ค่าชดเชยพักร้อน"]) }}</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>{{ format_number(row["gross_pay"]) }}</td> <!-- Total -->
+			<td></td>
+		</tr>
+		<tr>
+			<td>{{ format_number(row["หักเงินลาเกินสิทธิ์"]) }}</td>
+			<td>{{ format_number(row["หักเงินอื่นๆ"]) }}</td>
+			<td>{{ format_number(row["หักเงินภาษีบุคคลธรรมดา"]) }}</td>
+			<td>{{ format_number(row["หักเงินประกันสังคม"]) }}</td>
+			<td>{{ format_number(row["หักเงินกองทุนสำรองเลี้ยงชีพ"]) }}</td>
+			<td>{{ format_number(row["หักเงินกยศ"]) }}</td>
+			<td>{{ format_number(row["หักเงินสหกรณ์"]) }}</td>
+			<td></td>
+			<td>{{ format_number(row["หักเงินประกันสังคม"]) }}</td>  <!-- ปกสค มูลนิธิ -->
+			<td>{{ format_number(row["หักเงินกองทุนสำรองเลี้ยงชีพ"]) }}</td>  <!-- PVF- มูลนิธิ -->
+			<td></td>
+			<td>{{ format_number(row["total_deduction"]) }}</td>  <!-- รวมจ่าย -->
+			<td>{{ format_number(row["net_pay"]) }}</td>  <!-- สุทธิ -->
+		</tr>
+	{% } %}
+		<tr>
+			<td rowspan="2" colspan="3" style="text-align: center;"><h5>รวมทั้งหมด {{ data.length }} คน</h5></td>
+			<td>{{ format_number(เงินเดือน) == "NaN" ? format_number(0) : format_number(เงินเดือน)}}</td>
+			<td>{{ format_number(ค่าตำแหน่ง) == "NaN" ? format_number(0) : format_number(ค่าตำแหน่ง)}}</td>
+			<td>{{ format_number(ค่าตอบแทนพิเศษ) == "NaN" ? format_number(0) : format_number(ค่าตอบแทนพิเศษ)}}</td>
+			<td>{{ format_number(เงินได้อื่นๆ) == "NaN" ? format_number(0) : format_number(เงินได้อื่นๆ)}}</td>
+			<td>{{ format_number(ค่าชดเชย) == "NaN" ? format_number(0) : format_number(ค่าชดเชย)}}</td>
+			<td>{{ format_number(ค่าชดเชยพักร้อน) == "NaN" ? format_number(0) : format_number(ค่าชดเชยพักร้อน)}}</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>{{ format_number(gross_pay) == "NaN" ? format_number(0) : format_number(gross_pay)}}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>{{ format_number(หักเงินลาเกินสิทธิ์) == "NaN" ? format_number(0) : format_number(หักเงินลาเกินสิทธิ์)}}</td>
+			<td>{{ format_number(หักเงินอื่นๆ) == "NaN" ? format_number(0) : format_number(หักเงินอื่นๆ)}}</td>
+			<td>{{ format_number(หักเงินภาษีบุคคลธรรมดา) == "NaN" ? format_number(0) : format_number(หักเงินภาษีบุคคลธรรมดา)}}</td>
+			<td>{{ format_number(หักเงินประกันสังคม) == "NaN" ? format_number(0) : format_number(หักเงินประกันสังคม)}}</td>
+			<td>{{ format_number(หักเงินกองทุนสำรองเลี้ยงชีพ) == "NaN" ? format_number(0) : format_number(หักเงินกองทุนสำรองเลี้ยงชีพ)}}</td>
+			<td>{{ format_number(หักเงินกยศ) == "NaN" ? format_number(0) : format_number(หักเงินกยศ)}}</td>
+			<td>{{ format_number(หักเงินสหกรณ์) == "NaN" ? format_number(0) : format_number(หักเงินสหกรณ์)}}</td>
+			<td></td>
+			<td>{{ format_number(หักเงินประกันสังคม) == "NaN" ? format_number(0) : format_number(หักเงินประกันสังคม)}}</td>
+			<td>{{ format_number(หักเงินกองทุนสำรองเลี้ยงชีพ) == "NaN" ? format_number(0) : format_number(หักเงินกองทุนสำรองเลี้ยงชีพ)}}</td>  <!-- PVF- มูลนิธิ -->
+			<td></td>
+			<td>{{ format_number(total_deduction) == "NaN" ? format_number(0) : format_number(total_deduction)}}</td>
+			<td>{{ format_number(net_pay) == "NaN" ? format_number(0) : format_number(net_pay)}}</td>
+		</tr>
+	</tbody>
+</table>
+<p style="font-size: 12px;" class="text-left">{{ __("พิมพ์วันที่") }} {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>

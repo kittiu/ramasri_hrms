@@ -1,0 +1,30 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-02-14 10:34:47.240998",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Ramasri",
+ "letterhead": null,
+ "modified": "2024-02-14 10:34:47.240998",
+ "modified_by": "Administrator",
+ "module": "Ramasri Hrms",
+ "name": "Salary Register Ramasri",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Salary Slip",
+ "report_name": "Salary Register Ramasri",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ]
+}
