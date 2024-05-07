@@ -32,6 +32,7 @@ def get_payroll_summary_by_component(payroll_entry, prev=0):
 			from `tabSalary Slip` ss join `tabSalary Detail` sd on sd.parent = ss.name
 				join `tabPayroll Entry` pe on pe.name = ss.payroll_entry
 			where ss.payroll_entry = %s
+				and ss.docstatus != 2
 				and pe.docstatus != 2
 		group by pe.posting_date, sd.parentfield, sd.salary_component
 		) a
